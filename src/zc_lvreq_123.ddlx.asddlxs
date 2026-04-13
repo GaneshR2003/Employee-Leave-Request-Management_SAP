@@ -1,0 +1,39 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Leave Request', typeNamePlural: 'Leave Requests' }
+}
+annotate view ZC_LvReq_123 with
+{
+  @UI.facet: [ { id: 'RequestData', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Request Details', position: 10 } ]
+  
+  @UI.hidden: true
+  RequestId;
+  
+  @UI.hidden: true
+  EmployeeId;
+  
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  @EndUserText.label: 'Leave Type'
+  LeaveType;
+  
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  @EndUserText.label: 'Start Date'
+  StartDate;
+  
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  @EndUserText.label: 'End Date'
+  EndDate;
+  
+  @UI.lineItem: [ { position: 40, criticality: 'StatusCriticality', criticalityRepresentation: #WITH_ICON },
+                  { position: 50, type: #FOR_ACTION, dataAction: 'ApproveLeave', label: 'Approve' },
+                  { position: 60, type: #FOR_ACTION, dataAction: 'RejectLeave', label: 'Reject' } ]
+  @UI.identification: [ { position: 40, criticality: 'StatusCriticality' } ]
+  @EndUserText.label: 'Approval Status'
+  Status;
+
+  @UI.hidden: true
+  StatusCriticality;
+}

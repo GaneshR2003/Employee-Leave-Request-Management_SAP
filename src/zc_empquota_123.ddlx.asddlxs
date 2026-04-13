@@ -1,0 +1,44 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Employee', typeNamePlural: 'Employees', title: { type: #STANDARD, value: 'EmployeeName' } }
+}
+annotate view ZC_EmpQuota_123 with
+{
+  @UI.facet: [ { id: 'EmployeeData', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Employee Info', position: 10 },
+               { id: 'LeaveRequests', purpose: #STANDARD, type: #LINEITEM_REFERENCE, targetElement: '_LeaveRequests', position: 20 } ]
+               
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  @EndUserText.label: 'Employee ID' 
+  EmployeeId;
+  
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  @EndUserText.label: 'Employee Name'
+  EmployeeName;
+  
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  @EndUserText.label: 'Department'
+  Department;
+  
+  @UI.identification: [{ position: 40 }]
+  @EndUserText.label: 'Total Leave Quota (Days)'
+  TotalLeaveQuota;
+  
+  @UI.identification: [{ position: 50 }]
+  @EndUserText.label: 'Used Leave (Days)'
+  UsedLeaveDays;
+  
+  @UI.lineItem: [{ position: 60, type: #AS_DATAPOINT }]
+  @UI.dataPoint: { 
+    visualization: #PROGRESS, 
+    targetValueElement: 'TotalLeaveQuota', 
+    criticality: 'PercentageCriticality' 
+  }
+  @EndUserText.label: 'Leave Usage'
+  LeavePercentage;
+
+  @UI.hidden: true
+  PercentageCriticality;
+}

@@ -1,0 +1,26 @@
+unmanaged implementation in class zbp_i_empquota_123 unique;
+strict ( 2 );
+
+define behavior for ZI_EmpQuota_123 alias EmployeeQuota
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+  association _LeaveRequests { create; }
+  field ( readonly ) EmployeeId, LeavePercentage;
+}
+
+define behavior for ZI_LvReq_123 alias LeaveRequest
+lock dependent by _EmployeeQuota
+authorization dependent by _EmployeeQuota
+{
+  update;
+  delete;
+  association _EmployeeQuota;
+  field ( readonly ) RequestId, EmployeeId, Status;
+
+  action ApproveLeave result [1] $self;
+  action RejectLeave result [1] $self;
+}

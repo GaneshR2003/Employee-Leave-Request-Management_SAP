@@ -1,0 +1,22 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_EmpQuota_123 alias EmployeeQuota
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _LeaveRequests { create; }
+}
+
+define behavior for ZC_LvReq_123 alias LeaveRequest
+{
+  use update;
+  use delete;
+
+  use action ApproveLeave;
+  use action RejectLeave;
+
+  use association _EmployeeQuota;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Employee Quota'
+define service ZUI_EMPQUOTA_123 {
+  expose ZC_EmpQuota_123 as EmployeeQuota;
+  expose ZC_LvReq_123    as LeaveRequest;
+}
